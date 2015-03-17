@@ -1,0 +1,13 @@
+<div class="page-header">
+  <h1>Generiranje obvestila o odstopu terjatev</h1>
+</div>
+
+<%= semantic_form_for 'user_data', :url => 'static/get_rdf',  method: :post do |f| %>
+  <%= f.inputs  do %>
+    <%= f.input :url_naslov, :label => "URL naslov: " %>
+  <% end %>
+
+  <%= f.actions do %>
+    <%= f.action :submit, :as => :button, :label => "Pridobi RDF" %>
+  <% end %>
+<% end %>

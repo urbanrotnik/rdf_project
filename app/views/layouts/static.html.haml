@@ -1,0 +1,31 @@
+!!!
+%html
+  %head
+    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1, maximum-scale=1"}
+    %title= content_for?(:title) ? yield(:title) : "Terjatve"
+    %meta{:content => content_for?(:description) ? yield(:description) : "Terjatve Description", :name => "description"}
+    = stylesheet_link_tag :application, :media => "all"
+    = javascript_include_tag :application
+    //:css 
+    //  body{color:red}
+    = csrf_meta_tags
+    = content_for :header
+    = yield(:head)
+  %body
+    = render "shared/navigation_bar"
+
+    .container
+      .row.row-offcanvas.row-offcanvas-left
+        #sidebar.col-xs-6.col-sm-3.sidebar-offcanvas{:role => "navigation"}
+        .col-xs-12.col-sm-9
+          -if(!flash.empty?)
+            .alert.alert-warning
+              .flash_messages
+                - flash.each do |key, value|
+                  = content_tag(:div, value, :class => "flash #{key}")
+          %p.pull-left.visible-xs
+            %button.btn.btn-primary.btn-xs{"data-toggle" => "offcanvas", :type => "button"} Prikaži navigacijo
+          =yield
+      %hr
+        %footer
+          %p © RDF 2015
